@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>WebRTC Video test</title>
+  <style>
+    body {
+      padding: 0;
+      margin: 0;
+      background: black;
+      display: flex;
+      width: 100vw;
+      height: 100vh;
+      justify-content: center;
+    }
+
+    video {
+      height: 100vh;
+      max-width: 100vw;
+      animation: video-effects 5s infinite;
+    }
+
+    @keyframes video-effects {
+      0% {
+        filter: blur(0px) hue-rotate(0deg);
+        transform: rotate(0deg);
+      }
+
+      50% {
+        filter: blur(10px) hue-rotate(180deg);
+      }
+
+      100% {
+        filter: blur(0px) hue-rotate(360deg);
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <video id="myVideo" muted autoplay></video>
+  <script>
+    async function go() {
+      let constraints = {
+        audio: true,
+        video: true
+      };
+
+      let stream = await navigator.mediaDevices.getUserMedia(constraints);
+      let videoEl = document.getElementById('myVideo');
+
+      videoEl.srcObject = stream;
+    }
+    go();
+  </script>
+</body>
+
+</html>

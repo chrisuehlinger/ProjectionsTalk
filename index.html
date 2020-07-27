@@ -1,49 +1,698 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/black.css">
+  <title>Let's Do the Timeout Again</title>
 
-		<!-- Theme used for syntax highlighting of code -->
-		<link rel="stylesheet" href="lib/css/zenburn.css">
+  <link href="https://fonts.googleapis.com/css?family=Nosifer" rel="stylesheet">
+  <link rel="stylesheet" href="css/reveal.css">
+  <link rel="stylesheet" href="css/theme/night.css">
 
-		<!-- Printing and PDF exports -->
-		<script>
-			var link = document.createElement( 'link' );
-			link.rel = 'stylesheet';
-			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
-			document.getElementsByTagName( 'head' )[0].appendChild( link );
-		</script>
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
-			</div>
-		</div>
+  <!-- Theme used for syntax highlighting of code -->
+  <link rel="stylesheet" href="lib/css/zenburn.css">
+  <style>
+    .reveal h1, .reveal h2 {
+      font-family: 'Nosifer', cursive;
+      color: red;
+    }
+  </style>
 
-		<script src="lib/js/head.min.js"></script>
-		<script src="js/reveal.js"></script>
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+    document.getElementsByTagName('head')[0].appendChild(link);
+  </script>
+</head>
 
-		<script>
-			// More info about config & dependencies:
-			// - https://github.com/hakimel/reveal.js#configuration
-			// - https://github.com/hakimel/reveal.js#dependencies
-			Reveal.initialize({
-				dependencies: [
-					{ src: 'plugin/markdown/marked.js' },
-					{ src: 'plugin/markdown/markdown.js' },
-					{ src: 'plugin/notes/notes.js', async: true },
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
-				]
-			});
-		</script>
-	</body>
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section>
+        <h1>Let's Do The Timeout Again!</h1>
+        <p style="text-transform: none">Using JavaScript to create special effects in Theatre</p>
+        <p>by Chris Uehlinger (@Uehreka)</p>
+        <aside class="notes"><div style="white-space: pre-line">
+- Introduce self
+- This talk is about projections
+- Overview of several things
+- Hoping to inspire
+- Tips in the Slack
+        </div></aside>
+      </section>
+      <section>
+        <h2>Inspiration</h2>
+        <img class="stretch" src="images/neverwhere-poster.jpg" />
+        <aside class="notes"><div style="white-space: pre-line">
+- My interest began in May of 2016, Cohesion's Neverwhere
+- explore how technology can augment and amplify performance
+        </div></aside>
+      </section>
+      <section>
+        <iframe class="stretch" data-src="https://codepen.io/kenjiSpecial/embed/wavooR?height=700&theme-id=0&default-tab=result&user=kenjiSpecial&slug-hash=wavooR&pen-title=gl%20particle%20sns%20icons.&name=cp_embed_1"></iframe>
+        <aside class="notes"><div style="white-space: pre-line">
+- Wizard of Oz style effect, particle explosion
+        </div></aside>
+      </section>
+      <section>
+          <iframe class="stretch" data-src="https://codepen.io/kenjiSpecial/embed/vELOrM?height=700&theme-id=0&default-tab=result&user=kenjiSpecial&slug-hash=vELOrM&pen-title=Day54%3A%20WebGL%20Particle%20Animation.&name=cp_embed_1"></iframe>
+          <aside class="notes"><div style="white-space: pre-line">
+- Tried using a webcam and WebGL, couldn't hit 60fps
+        </div></aside>
+      </section>
+      <section data-background-video="https://cdn.chrisuehlinger.com/timeout-videos/iphone-x-commercial.mp4">
+        <aside class="notes"><div style="white-space: pre-line">
+- 2017: Apple released iPhone X
+- I created a demo of the effect
+- Demo done, show it to a Theatre company! Psyche
+        </div></aside>
+      </section>
+      <section>
+        <img class="stretch" src="images/rocky-poster.jpg" />
+        <aside class="notes"><div style="white-space: pre-line">
+- July 2018, Rocky Horror, had an idea
+        </div></aside>
+      </section>
+      <section data-background-video="https://cdn.chrisuehlinger.com/timeout-videos/science-fiction.mp4">
+        <aside class="notes"><div style="white-space: pre-line">
+- Science Fiction/Double Feature
+- Rocky Horror Show vs Rocky Horror Picture Show
+- Iconic shot, but can't be done on stage
+        </div></aside>
+      </section>
+      <section>
+        <h2>Demo</h2>
+        <aside class="notes"><div style="white-space: pre-line">
+- Unity Engine, ARKit
+- Demo the app
+- they loved it! Gave me carte blanche to do whatever projections I wanted
+        </div></aside>
+      </section>
+      <section data-background-video="https://cdn.chrisuehlinger.com/timeout-videos/preshow-announcement.mp4">
+        <aside class="notes"><div style="white-space: pre-line">
+- Show clip of preshow
+- Magenta read an announcement
+- To assure it was live: Called out people in the audience
+- This was the culmination of a few years of thinking about how to integrate programming and theatre, but it was just the beginning of my work actually bringing these things to life.
+- Not actually JS, but everything else is
+        </div></aside>
+      </section>
+      <section data-autoslide="5000" data-background-video="https://cdn.chrisuehlinger.com/timeout-videos/tell-us-about-it-janet.mp4">
+      </section>
+      <section data-background-video="raw-video/Science-Fiction-Final-2.mp4">
+        <aside class="notes"><div style="white-space: pre-line">
+- Science Fiction/Double Feature
+- a nostalgic song about Scifi B-Movies from the 50's and 60's,
+- accompany it with clips of each of the movies as they're mentioned in the lyrics.
+        </div></aside>
+      </section>
+      <section data-background-video="raw-video/science-fiction-rehearsal.mov">
+        <aside class="notes"><div style="white-space: pre-line">
+- Show the clip of us practicing
+- Issues with tempo and timing
+- the tempo can even change *during* the song, like when a chorus starts to take off.
+- Most people would give up, but not me! JavaScript!
+        </div></aside>
+      </section>
+      <section>
+        <h2>Beat Matching in JS</h2>
+        <pre class="stretch"><code>let theVid = document.getElementById('science');
+let lastTapTime = Date.now();
+let tapTimes = [];
+
+// Initialize with tapTimes that would average to 110bpm
+for(i=0; i < 5; i++){
+  tapTimes[i] = 0.545454545454;
+}
+
+window.addEventListener('keydown', () => {
+  let timeSinceLastTap = (Date.now() - lastTapTime) / 1000;
+  tapTimes.unshift(timeSinceLastTap);
+  tapTimes.pop();
+
+  let avgInterval = tapTimes.reduce((avg, interval) => {
+    return avg + interval/tapTimes.length
+  }, 0);
+
+  let beatsPerMinute = 60 / avgInterval;
+  theVid.playbackRate = beatsPerMinute / 110;
+  lastTapTime = Date.now();
+});</code></pre>
+        <aside class="notes"><div style="white-space: pre-line">
+- keydown event handlers
+- Calculate Beats Per Minute
+- Adjust video.playbackRate
+        </div></aside>
+      </section>
+      <section>
+          <iframe class="stretch" allow="microphone; camera" data-src="http://localhost:4545/rocky/science-fiction/index.html"></iframe>
+      </section>
+      <section>
+        <h2>Monitor Footage</h2>
+        <iframe class="stretch" allow="microphone; camera" data-src="http://localhost:4545/rocky/monitor/dr-scott.html"></iframe>
+        <aside class="notes"><div style="white-space: pre-line">
+- Talk about the scene with the monitors
+- Talk about Seriously.js
+- take clips of video and layer different filters on top of them in real time.
+- Has advantages over After Effects
+- LIVE WEBCAM FOOTAGE, THIS IS BANANAS
+- WebRTC, which I'll get into later.
+        </div></aside>
+      </section>
+      <section>
+        <h2>Seriously.js</h2>
+        <iframe class="stretch" allow="microphone; camera" data-src="http://localhost:4545/rocky/monitor/Seriously.js/index.html"></iframe>
+        <aside class="notes"><div style="white-space: pre-line">
+- Talk about the scene with the monitors
+- Talk about Seriously.js
+- take clips of video and layer different filters on top of them in real time.
+- Has advantages over After Effects
+- LIVE WEBCAM FOOTAGE, THIS IS BANANAS
+- WebRTC, which I'll get into later.
+        </div></aside>
+      </section>
+      <section>
+        <h2>Seriously.js Example</h2>
+        <pre class="stretch"><code>const seriously = new Seriously();
+let source = seriously.source('#remoteVideo'); // A &lt;video&gt; element
+let filmgrain = seriously.effect('filmgrain');
+let target = seriously.target('#target'); // A &lt;canvas&gt; element
+
+// Send the source to the filmgrain filter
+filmgrain.source = source;
+
+// Render the output of the filmgrain filter to the canvas
+target.source = filmgrain;
+
+// Call this to start the effect
+seriously.go(function (now) {
+  filmgrain.time = now / 200; // Helps randomize the filmgrain
+});
+</code></pre>
+<aside class="notes"><div style="white-space: pre-line">
+- Talk about the scene with the monitors
+- Talk about Seriously.js
+- take clips of video and layer different filters on top of them in real time.
+- Has advantages over After Effects
+- LIVE WEBCAM FOOTAGE, THIS IS BANANAS
+- WebRTC, which I'll get into later.
+</div></aside>
+      </section>
+      <section>
+        <h2>Seriously.js Webcam Example</h2>
+        <pre class="stretch"><code>const seriously = new Seriously();
+let source = seriously.source('camera'); // The user's webcam feed
+let filmgrain = seriously.effect('filmgrain');
+let target = seriously.target('#target'); // A &lt;canvas&gt; element
+
+// Send the webcam feed to the filmgrain filter
+filmgrain.source = source;
+
+// Render the output of the filmgrain filter to the canvas
+target.source = filmgrain;
+
+// Call this to start the effect
+seriously.go(function (now) {
+  filmgrain.time = now / 200; // Helps randomize the filmgrain
+});
+</code></pre>
+<aside class="notes"><div style="white-space: pre-line">
+- Talk about the scene with the monitors
+- Talk about Seriously.js
+- take clips of video and layer different filters on top of them in real time.
+- Has advantages over After Effects
+- LIVE WEBCAM FOOTAGE, THIS IS BANANAS
+- WebRTC, which I'll get into later.
+</div></aside>
+      </section>
+      <section>
+        <img class="stretch" src="images/tyd-poster.jpg" />
+        <aside class="notes"><div style="white-space: pre-line">
+- Thank You Dad, one man show about Jim Jones (Jonestown Massacre)
+        </div></aside>
+      </section>
+      <section>
+        <img class="stretch" src="images/tyd-lance.jpg" />
+        <aside class="notes"><div style="white-space: pre-line">
+- Thank You Dad, one man show about Jim Jones (Jonestown Massacre)
+- Explain setup for Rocky
+- MacOS's spaces feature
+- Some problems with this setup: Poor visibility, Bad UX
+        </div></aside>
+      </section>
+      <section data-background-video="https://cdn.chrisuehlinger.com/timeout-videos/booth-cam.mp4">
+        <aside class="notes"><div style="white-space: pre-line">
+- Worked "OK" for 7 cues
+- However, this was the most sophisticated show I've ever worked on
+- I knew I'd need something more robust for a 30 cue show
+        </div></aside>
+      </section>
+      <section data-background-video="https://cdn.chrisuehlinger.com/timeout-videos/3-projectors-demo.mp4">
+        <aside class="notes"><div style="white-space: pre-line">
+- Three projectors for the final cue
+        </div></aside>
+      </section>
+      <section>
+        <img class="stretch" src="images/IMG_0269.jpg" />
+        <aside class="notes"><div style="white-space: pre-line">
+- Laptop with 2 TB projectors plugged in (3 won't work)
+        </div></aside>
+      </section>
+      <section>
+        <img class="stretch" src="images/IMG_0272.jpg" />
+        <aside class="notes"><div style="white-space: pre-line">
+- iPad with HDMI plugged in
+        </div></aside>
+      </section>
+      <section>
+        <img class="stretch" src="images/IMG_0271.jpg" />
+        <aside class="notes"><div style="white-space: pre-line">
+- No screen mirroring: I had a control panel on my laptop,
+and a different web page for each screen
+(inspired by Reveal.js's notes feature)
+        </div></aside>
+      </section>
+      <section>
+        <iframe style="background: white" class="stretch" src="http://localhost:5000" ></iframe>
+        <aside class="notes"><div style="white-space: pre-line">
+- No screen mirroring: I had a control panel on my laptop,
+and a different web page for each screen
+(inspired by Reveal.js's notes feature)
+        </div></aside>
+      </section>
+      <section>
+        <h2>Cue list</h2>
+        <pre class="stretch"><code class="javascript">let playlist = [
+{
+  "description": "Act 1 Intro",
+  "type": "VIDEO",
+  "href": "/act-1-intro/intro.mp4"
+},
+{
+  "description": "Indianapolis House",
+  "type": "PAGE",
+  "href":"/first-act/index.html"
+},
+{
+  "description": "Switch to Church",
+  "type": "GO"
+},
+{
+  "description": "Switch Back to Indianapolis House",
+  "type": "GO"
+},
+{
+  "description": "Turn Off Projection",
+  "type": "OFF"
+},
+{
+  "description": "Act 1->2 Transition",
+  "type": "PAGE",
+  "href": "/1-2-transition/index.html"
+},
+{
+  "description": "Turn off projector",
+  "type": "OFF"
+},
+{
+  "description": "Voiceover 1",
+  "type": "PAGE",
+  "href": "/act-2-voiceovers/vo1.html"
+},
+{
+  "description": "Live Feed",
+  "type": "LIVE",
+  "luma": false
+},
+{
+  "description": "Voiceover 3",
+  "type": "VIDEO",
+  "href": "/act-2-voiceovers/final-cuts/vo-3.mp4"
+},
+{
+  "description": "Voiceover 4",
+  "type": "VIDEO",
+  "href": "/act-2-voiceovers/final-cuts/vo4.mp4"
+},
+{
+  "description": "Voiceover 5",
+  "type": "VIDEO",
+  "href": "/act-2-voiceovers/final-cuts/vo-5.mp4"
+},
+{
+  "description": "Voiceover 6",
+  "type": "VIDEO",
+  "href": "/act-2-voiceovers/final-cuts/vo6.mp4"
+},
+{
+  "description": "Voiceover 7",
+  "type": "VIDEO",
+  "href": "/act-2-voiceovers/final-cuts/vo7.mp4"
+},
+{
+  "description": "Voiceover 8",
+  "type": "VIDEO",
+  "href": "/act-2-voiceovers/final-cuts/vo8.mp4"
+},
+{
+  "description": "Voiceover 9",
+  "type": "VIDEO",
+  "href": "/act-2-voiceovers/final-cuts/vo9.mp4"
+},
+{
+  "description": "Voiceover 10",
+  "type": "VIDEO",
+  "href": "/act-2-voiceovers/final-cuts/vo10.mp4"
+},
+{
+  "description": "Voiceover 11",
+  "type": "VIDEO",
+  "href": "/act-2-voiceovers/final-cuts/vo11.mp4"
+},
+{
+  "description": "Voiceover 12",
+  "type": "VIDEO",
+  "href": "/act-2-voiceovers/final-cuts/vo12.mp4"
+},
+{
+  "description": "Voiceover 13",
+  "type": "VIDEO",
+  "href": "/act-2-voiceovers/final-cuts/vo13.mp4"
+},
+{
+  "description": "Live Feed",
+  "type": "LIVE",
+  "luma": true
+},
+{
+  "description": "End Live Feed",
+  "type": "OFF"
+},
+{
+  "description": "Act 3 Intro",
+  "type": "VIDEO",
+  "href": "/act-3/act-3-intro.mp4"
+},
+{
+  "description": "Turn off projector",
+  "type": "OFF"
+},
+{
+  "description": "Act 3 Outro",
+  "type": "FINAL_MONTAGE",
+},
+{
+  "description": "Turn Off Projector",
+  "type": "OFF"
+}
+];</code></pre>
+<aside class="notes"><div style="white-space: pre-line">
+- 'splain
+</div></aside>
+      </section>
+      <section>
+        <h2>Cue-linger Control Panel Page</h2>
+        <pre class="stretch"><code class="javascript">$scope.sendStage = (cue) => {
+  $scope.model.currentStaged = cue
+  socket.emit('staging:control', cue);
+}
+
+$scope.sendCue = (cue) => {
+  $scope.model.currentPlaying = cue;
+  $scope.model.currentStaged = null;
+  socket.emit('play:control', cue);
+}
+
+$scope.sendRefresh = () => {
+  socket.emit('refresh:control', {});
+}
+
+$scope.bail = () => {
+  $scope.sendCue({
+    description: 'BAILED',
+    type: 'OFF'
+  });
+};</code></pre>
+<aside class="notes"><div style="white-space: pre-line">
+- 'splain
+</div></aside>
+      </section>
+      <section>
+        <h2>Cue-linger Server Side</h2>
+        <pre class="stretch"><code class="javascript">io.on('connection', function (socket) {
+socket.on('staging:control', function (data) {
+  io.emit('staging:display', data);
+});
+socket.on('play:control', function (data) {
+  io.emit('play:display', data);
+});
+socket.on('refresh:control', function (data) {
+  io.emit('refresh:display', data);
+});
+});</code></pre>
+<aside class="notes"><div style="white-space: pre-line">
+- 'splain
+</div></aside>
+      </section>
+      <section>
+        <h2>Cue-linger Display Page</h2>
+        <pre class="stretch"><code class="javascript">// First, find out which display this is
+const urlParams = new URLSearchParams(window.location.search);
+const displayId = +urlParams.get('id');
+
+if(displayId === 0) {
+  $('body').append(`&lt;iframe class="live-feed-frame hidden" allow="microphone; camera" src="https://6836ac72.ngrok.io/index.html?host=true"&gt;&lt;/iframe&gt;`);
+}
+
+let staging = null;
+let playing = null;
+
+var socket = io.connect(`https://${location.host}`);
+
+socket.on('staging:display', function (cue) {
+  console.log('staging', cue);
+  staging = cue;
+
+  if($('.staging').length &gt; 0){
+    if($('.staging').hasClass('live-feed-frame')) {
+      $('.staging').removeClass('staging').addClass('hidden');
+    } else {
+      $('.staging').remove();
+    }
+  }
+
+  if(displayId === 0) {
+    switch (cue.type) {
+      case TYPES.VIDEO:
+        $('.cue-bag').append(`&lt;video class="staging" src="https://${location.host}${cue.href}" muted&gt;&lt;/video&gt;`);
+        break;
+      case TYPES.PAGE:
+        $('.cue-bag').append(`&lt;iframe class="staging" src="https://${location.host}${cue.href}"&gt;&lt;/iframe&gt;`);
+        break;
+      case TYPES.GO: break;
+      case TYPES.LIVE:
+        $('.live-feed-frame').removeClass('hidden').addClass('staging');
+        $('.live-feed-frame')[0].contentWindow.postMessage(JSON.stringify({ command: 'STOP' }), '*');
+        break;
+    }
+  }
+
+  switch(cue.type){
+    case TYPES.OFF: break;
+    case TYPES.FINAL_MONTAGE:
+        $('.cue-bag').append(`&lt;iframe class="staging" src="https://${location.host}/act-3-final/index.html?displayid=${displayId}" muted&gt;&lt;/iframe&gt;`);
+        break;
+  }
+});
+
+socket.on('play:display', function (cue) {
+  console.log('play', cue);
+  playing = cue;
+  staging = null;
+
+  if(displayId === 0) {
+    switch (cue.type) {
+      case TYPES.VIDEO:
+        $('.playing').removeClass('playing').addClass('done');
+        $('.staging').removeClass('staging').addClass('playing');
+        $('.playing')[0].play();
+        $('.playing').on('ended', e => {
+          $('.playing').remove();
+        });
+        break;
+      case TYPES.PAGE:
+        $('.playing').removeClass('playing').addClass('done');
+        $('.staging').removeClass('staging').addClass('playing');
+        $('.playing')[0].contentWindow.postMessage(JSON.stringify({ command: 'START' }), '*');
+        break;
+      case TYPES.GO:
+        $('.playing')[0].contentWindow.postMessage(JSON.stringify({ command: 'NEXT' }), '*');
+        break;
+      case TYPES.LIVE:
+        $('.playing').removeClass('playing').addClass('done');
+        $('.staging').removeClass('staging').addClass('playing');
+        $('.playing')[0].contentWindow.postMessage(JSON.stringify({ command: 'START', luma: cue.luma }), '*');
+        break;
+    }
+  }
+
+  switch(cue.type){
+    case TYPES.OFF:
+      $('.playing').removeClass('playing').addClass('done');
+      break;
+    case TYPES.FINAL_MONTAGE:
+      $('.playing').removeClass('playing').addClass('done');
+      $('.staging').removeClass('staging').addClass('playing');
+      $('.playing')[0].contentWindow.postMessage(JSON.stringify({ command: 'START' }), '*');
+      break;
+  }
+
+  if($('.done').length > 0){
+    if($('.done').hasClass('live-feed-frame')) {
+      $('.done').removeClass('done').addClass('hidden');
+    } else {
+      $('.done').remove();
+    }
+  }
+
+});
+
+socket.on('refresh:display', function () {
+  location.reload();
+});</code></pre>
+<aside class="notes"><div style="white-space: pre-line">
+- 'splain
+</div></aside>
+      </section>
+      <section data-background-video="https://cdn.chrisuehlinger.com/timeout-videos/live-feed.mp4">
+        <aside class="notes"><div style="white-space: pre-line">
+- 'splain
+        </div></aside>
+      </section>
+      <section>
+        <img class="stretch" src="images/tyd-lance.jpg" />
+        <aside class="notes"><div style="white-space: pre-line">
+- Explain how it was set up
+        </div></aside>
+      </section>
+      <section>
+        <h2>WebRTC</h2>
+        <ul>
+          <li>RTC === "Real Time Communication"</li>
+          <li>A browser API with 2 purposes:
+            <ul>
+              <li>Get the user's webcam and microphone feed</li>
+              <li>Send streams of audio, video and data between users (directly, Peer2Peer)</li>
+            </ul>
+          </li>
+        </ul>
+        <aside class="notes"><div style="white-space: pre-line">
+- WebRTC: Real Time Communication
+- This API has many parts, and deserves a talk of its own, but basically this is a JavaScript API that you can use to build Video conferencing apps.
+- P2P communication
+        </div></aside>
+      </section>
+      <section>
+        <h2>getUserMedia</h2>
+        <pre class="stretch"><code class="javascript">let constraints = {
+  audio: true,
+  video: {
+    width: { min: 1024, ideal: 1280, max: 1920 },
+    height: { min: 776, ideal: 720, max: 1080 },
+    facingMode: 'user'
+  }
+};
+
+let stream = await navigator.mediaDevices.getUserMedia(constraints);
+let videoEl = document.getElementById('myVideo');
+
+videoEl.srcObject = stream;
+
+// Old (deprecated) syntax:
+// video.src = URL.createObjectURL(stream);</code></pre>
+<aside class="notes"><div style="white-space: pre-line">
+- 'splain
+</div></aside>
+      </section>
+      <section>
+        <h2>Using the video stream</h2>
+        <div class="stretch" style="display: flex; justify-content: space-between; align-items: center">
+          <iframe style="width: 640px; height: 480px" data-src="lib/webrtc-videotest.html"></iframe>
+          <pre style="margin-top: 0;max-width: 50%;"><code>video {
+  animation: video-effects 5s infinite;
+}
+
+@keyframes video-effects {
+  0% {
+    filter: blur(0px) hue-rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  50% {
+    filter: blur(10px) hue-rotate(180deg);
+  }
+
+  100% {
+    filter: blur(0px) hue-rotate(360deg);
+    transform: rotate(360deg);
+  }
+}</code></pre>
+        </div>
+        <aside class="notes"><div style="white-space: pre-line">
+- apply effects to it with Seriously.js, or even just plain old CSS effects.
+        </div></aside>
+      </section>
+      <section>
+        <h2>Using the Audio Stream</h2>
+        <iframe class="stretch" allow="microphone; camera" data-src="https://webaudiodemos.appspot.com/input/index.html"></iframe>
+        <aside class="notes"><div style="white-space: pre-line">
+- Apply audio effects as well
+        </div></aside>
+      </section>
+      <section data-background-video="https://cdn.chrisuehlinger.com/timeout-videos/time-warp.mp4">
+        <h2>Thanks for watching!</h2>
+        <ul style="background: rgba(0,0,0,0.5); padding-left: 50px;">
+          <li>@Uehreka on Twitter</li>
+          <li>@chrisuehlinger on GitHub</li>
+          <li>Lots of demos over at chrisuehlinger.com</li>
+          <li>Check the Slack for notes!</li>
+        </ul>
+        <aside class="notes"><div style="white-space: pre-line">
+
+        </div></aside>
+      </section>
+    </div>
+  </div>
+
+  <script src="lib/js/head.min.js"></script>
+  <script src="js/reveal.js"></script>
+
+  <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+  <script>
+    // More info about config & dependencies:
+    // - https://github.com/hakimel/reveal.js#configuration
+    // - https://github.com/hakimel/reveal.js#dependencies
+    Reveal.initialize({
+      width: 1280,
+      height: 720,
+      progress: false,
+      history: true,
+      dependencies: [
+        { src: 'plugin/markdown/marked.js' },
+        { src: 'plugin/markdown/markdown.js' },
+        { src: 'plugin/notes/notes.js', async: true },
+        { src: 'plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); } },
+        { src: 'socket.io/socket.io.js', async: true },
+        { src: 'plugin/notes-server/client.js', async: true }
+      ]
+    });
+  </script>
+</body>
+
 </html>
